@@ -1,18 +1,31 @@
 import * as React from 'react';
 import { Link} from 'react-router-dom';
 import Main from './Main';
+import "./App.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
+
 export default function App() {
   return (
-    <>  
-      <div>
+    <div className='content'>  
+      <div className='navBar'>
+        <Link to='/'>
+        <div className='logo'>
+        <FontAwesomeIcon icon={faChampagneGlasses} size="3x" />
+          <h2 id='logoName'>Drink<br/>S4U</h2>
+        </div>
+        </Link>
+
         <ul>
           <li><Link to='/'>Home</Link> </li>
-          <li><Link to='/topics'>Topics</Link></li>
-          <li><Link to='/settings'>Settings</Link></li>
+          <li><Link to='/cocktails'>Cocktails</Link></li>
+          <li><Link to='/aboutUs'>About Us</Link></li>
         </ul>
-        <hr />
-        <Main />       
+        <Link to='/login'>
+        <button className='btn'> Login</button>
+        </Link>
       </div>   
-    </>
+        <Main />       
+    </div>
   )
 }

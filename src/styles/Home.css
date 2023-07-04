@@ -1,0 +1,50 @@
+
+.topcontent {
+  display: flex;
+  width: 108rem;
+  padding: 1.25rem 0rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.25rem;
+
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.30);
+  box-shadow: 0px 10px 4px 0px rgba(0, 0, 0, 0.45);
+}
+.imageText {
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+.imageCircles {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  background: none;
+  
+}
+
+.imageCircles img {
+  width: 20.36719rem;
+  height: 20.86513rem;
+  margin: 10px;
+  border-radius: 162.938px;
+  border: 3px solid #5A1807;
+}
+
+.imageCircles img:nth-child(2n) {
+  margin-top: 3rem;
+}
+
+.topcontent .findPerfDrink {
+  color: #191623;
+font-size: 7.75rem;
+font-family: Yusei Magic;
+line-height: 7.125rem;
+letter-spacing: -0.155rem;
+background: none;
+}
