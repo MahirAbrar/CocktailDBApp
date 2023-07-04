@@ -8,14 +8,10 @@ Database system to store user credentials.
 Comment based interaction under drinks.
 Ability to rate drinks from 1 to 5 star.
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
+How to run this file.
+Clone the files.
+`npm i`
+`npm start`
 ### `npm start`
 
 Runs the app in the development mode.\
