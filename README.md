@@ -1,11 +1,17 @@
-# Getting Started with Create React App
+The design of this website was created using figma.
+To view the design, please visit: https://www.figma.com/file/4KPIah4w5o9yS4rHroeDIq/CocktailDB?type=design&node-id=4%3A26&mode=design&t=1S4Au0EzNwGDbD7p-1.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Please note that the design for the mobile version is not completed.
 
-## Available Scripts
+Requirements:
+Database system to store user credentials.
+Comment based interaction under drinks.
+Ability to rate drinks from 1 to 5 star.
 
-In the project directory, you can run:
-
+How to run this file.
+Clone the files.
+`npm i`
+`npm start`
 ### `npm start`
 
 Runs the app in the development mode.\
