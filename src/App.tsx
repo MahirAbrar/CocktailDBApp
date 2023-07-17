@@ -7,7 +7,7 @@ import { faChampagneGlasses } from '@fortawesome/free-solid-svg-icons';
 
 export default function App() {
   return (
-    <div className='content'>  
+    <>  
       <div className='navBar'>
         <Link to='/'>
         <div className='logo'>
@@ -24,8 +24,10 @@ export default function App() {
         <Link to='/login'>
         <button className='btn'> Login</button>
         </Link>
-      </div>   
-        <Main />       
-    </div>
+      </div>  
+      <div className="content">
+        <Main/>       
+        </div> 
+    </>
   )
 }
