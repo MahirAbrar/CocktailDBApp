@@ -4,6 +4,10 @@ import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMartiniGlass } from '@fortawesome/free-solid-svg-icons';
+
 import "../styles/Home.css"
 
 interface ICocktail {
@@ -35,29 +39,54 @@ const Home: React.FC = (props) => {
     });
   }, []);
 
+  const [randomDrink, setRandomDrink] = useState<ICocktail | null>(null);
+
+  const getRandomDrink = async () => {
+    const result = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    setRandomDrink(result.data.drinks[0]);
+  }
   
+  // Animations
 
   const controls = useAnimation();
-  const { ref, inView } = useInView({
-    triggerOnce: true, // The animation will be triggered once
+  const [ref1, inView1] = useInView({
+    triggerOnce: true, 
   });
+  
+  const [ref2, inView2] = useInView({
+    triggerOnce: true, 
+  });
+  
+  const [ref3, inView3] = useInView({
+    triggerOnce: true, 
+  });
+  
+  const [ref4, inView4] = useInView({
+    triggerOnce: true, 
+  });
+  
 
 
   useEffect(() => {
-    if (inView) {
+    if (inView1) {
       controls.start("visible");
     }
-  }, [controls, inView]);
+  }, [controls, inView1]);
   if(isLoading) { // If isLoading is true, render a loading message
     return <h2>Loading...</h2>
   } else {
     return (
       <>
       <motion.div className='contentBox'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-      >
+  ref={ref1}
+  animate={inView1 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
         <div className="imageText">
           <div className="imageCircles">
             {cocktails.map((cocktail) => (
@@ -73,16 +102,17 @@ const Home: React.FC = (props) => {
         </Link>
       </motion.div>
       <hr/>
+
       <motion.div className='contentBox'
-          ref={ref}
-          animate={controls}
-          initial="hidden"
-          transition={{ duration: 2 }}
-          variants={{
-            visible: { opacity: 1 },
-            hidden: { opacity: 0 }
-          }}
-      >
+  ref={ref2}
+  animate={inView2 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
         <h3 className='bigText'>Top Alcoholic Drinks</h3>
         <div className="imageBox">
           {popularCocktails.map((popularCocktail) => (
@@ -97,21 +127,46 @@ const Home: React.FC = (props) => {
         </div>
       </motion.div>
       <motion.div className='contentBox'
-          ref={ref}
-          animate={controls}
-          initial="hidden"
-          transition={{ duration: 2 }}
-          variants={{
-            visible: { opacity: 1 },
-            hidden: { opacity: 0 }
-          }}
-      >
+  ref={ref3}
+  animate={inView3 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
         <h3 className='bigText'>Did you know?</h3>
         <div className="divButn">
   
         <button className='didYouKnow'>Coffee</button>
         </div>
       </motion.div>
+
+{/* CHOOSE A DRINK FOR ME */}
+<motion.div className='contentBox'
+  ref={ref4}
+  animate={inView4 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
+      <h3 className='bigText'>Choose a drink for me</h3>
+      <div className="divButn">
+        <button className='didYouKnow' onClick={getRandomDrink}>
+          <FontAwesomeIcon icon={faMartiniGlass} className='icn' />
+        </button>
+        </div>
+        {randomDrink && (
+          <>
+            <h4>{randomDrink.strDrink}</h4>
+            <img src={randomDrink.strDrinkThumb} alt={randomDrink.strDrink}/>
+          </>
+        )}
+    </motion.div>
       </>
     );
 
