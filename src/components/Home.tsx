@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMartiniGlass } from '@fortawesome/free-solid-svg-icons';
 
+// Animation
+
+
 import "../styles/Home.css"
 
 interface ICocktail {
@@ -66,7 +69,22 @@ const Home: React.FC = (props) => {
   });
   
 
+  // Find your perfect drink
+    // This is your text
+    const text = "Find your perfect drink...";
 
+    // Split the text into an array of characters
+    const characters = Array.from(text);
+
+
+    // Button for coffee, wine
+    const buttonTexts = ["Coffee", "Wine", "Cocktail", "Tea"];
+    const [buttonTextIndex, setButtonTextIndex] = useState(0); // New state for button text index
+
+    const handleButtonClick = () => { // Function to handle button click
+      setButtonTextIndex((buttonTextIndex + 1) % buttonTexts.length);
+    }
+    
   useEffect(() => {
     if (inView1) {
       controls.start("visible");
@@ -93,7 +111,23 @@ const Home: React.FC = (props) => {
               <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} key={cocktail.idDrink}/>
             ))}
           </div>
-          <h3 className='bigText'>Find your perfect drink...</h3>
+        
+          <h3 className='bigText'>
+            {characters.map((char, index) => (
+              // Render each character as a motion.span with a delay
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className='icn'
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h3>
+
+
         </div>
         <Link to="/cocktails">
           <div className="divButn">
@@ -138,9 +172,8 @@ const Home: React.FC = (props) => {
 >
         <h3 className='bigText'>Did you know?</h3>
         <div className="divButn">
-  
-        <button className='didYouKnow'>Coffee</button>
-        </div>
+        <button className='didYouKnow' onClick={handleButtonClick}>{buttonTexts[buttonTextIndex]}</button>
+      </div>
       </motion.div>
 
 {/* CHOOSE A DRINK FOR ME */}

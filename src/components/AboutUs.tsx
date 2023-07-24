@@ -1,16 +1,37 @@
-import React from 'react'
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import "../styles/Home.css"
 
 function AboutUs() {
+
+  const controls = useAnimation();
+  const [ref1, inView1] = useInView({
+    triggerOnce: true, 
+  });
+  
+  const [ref2, inView2] = useInView({
+    triggerOnce: true, 
+  });
+
+  useEffect(() => {
+    if (inView1) {
+      controls.start("visible");
+    }
+  }, [controls, inView1]);
+
   return (
     <>
-    <motion.div 
-      className='contentBox'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <motion.div className='contentBox'
+  ref={ref1}
+  animate={inView1 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
       <h3 className='bigText'>Hi! My Name is Mahir </h3> 
       <div className="paraContent">
       <p>
@@ -26,12 +47,16 @@ function AboutUs() {
       <div className="links"></div>
     </motion.div>
     <br />
-    <motion.div 
-      className='contentBox'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <motion.div className='contentBox'
+  ref={ref2}
+  animate={inView2 ? "visible" : "hidden"}
+  initial="hidden"
+  transition={{ duration: 2 }}
+  variants={{
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }}
+>
       <h3 className='bigText'>About This Project</h3>
       <div className="paraContent">
         <p>This is a simple web application which utilises the cocktailDB API from New tab (cocktaildb.com)
