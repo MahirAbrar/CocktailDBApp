@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Yusei Magic', sans-serif;
-  background: #95B46A;
+  background: #BEBCD4;
 }
 .navBar {
   display: flex;
@@ -16,7 +16,7 @@
   color: 191623;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
   border-bottom: 4px solid #5A1807;
-  background: #95B46A;
+  background: #BEBCD4;
 
   /* box-sizing: border-box; property makes it so that padding and border are included in the element's total width and height. Also changing 100vw to 100% on .navBar width avoids issues with the viewport scrollbar causing overflow. */
   width: 100%;

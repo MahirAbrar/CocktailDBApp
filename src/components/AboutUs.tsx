@@ -3,6 +3,9 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import "../styles/Home.css"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faLinked } from '@fortawesome/free-solid-svg-icons';
+
 function AboutUs() {
 
   const controls = useAnimation();
@@ -44,7 +47,9 @@ function AboutUs() {
         I am planning on building more projects to demonstrate my skills as well as improve my skills. If you would like to contact me, please do so via LinkedIn.
       </p>
       </div>
-      <div className="links"></div>
+      <div className="links">
+      {/* <FontAwesomeIcon icon={faMartiniGlass} className='icn' /> */}
+      </div>
     </motion.div>
     <br />
     <motion.div className='contentBox'

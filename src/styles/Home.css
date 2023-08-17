@@ -154,3 +154,17 @@ border: none;
 .icn {
   background: none;
 }
+
+.randomDrink {
+  display: flex;
+padding: 1rem 0.625rem;
+flex-direction: column;
+align-items: flex-start;
+gap: 0.625rem;
+background: none;
+}
+
+.randomDrink img {
+  width: 30rem;
+height: 22.5rem;
+}
