@@ -4,7 +4,8 @@ import { useInView } from 'react-intersection-observer';
 import "../styles/Home.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faLinked } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 function AboutUs() {
 
@@ -47,8 +48,19 @@ function AboutUs() {
         I am planning on building more projects to demonstrate my skills as well as improve my skills. If you would like to contact me, please do so via LinkedIn.
       </p>
       </div>
-      <div className="links">
-      {/* <FontAwesomeIcon icon={faMartiniGlass} className='icn' /> */}
+      <div className="socials">
+      <a href="https://www.linkedin.com/in/hamid-abrar-mahir/">
+        <div className="iconAndText">
+      <FontAwesomeIcon icon={faLinkedin as IconDefinition} className='icn' size='3x'/>
+      <h3>Hamid Abrar Mahir | LinkedIn</h3>
+        </div>
+      </a>
+          <a href="https://github.com/MahirAbrar">
+        <div className="iconAndText">
+      <FontAwesomeIcon icon={faGithub as IconDefinition} className='icn' size='3x' />
+      <h3>mahirabrar | Github</h3>
+        </div>
+          </a>
       </div>
     </motion.div>
     <br />
