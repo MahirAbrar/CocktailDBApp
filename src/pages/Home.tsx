@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMartiniGlass } from '@fortawesome/free-solid-svg-icons';
 
 // Animation
-
-
 import "../styles/Home.css"
 
 interface ICocktail {
@@ -18,8 +16,12 @@ interface ICocktail {
   strDrinkThumb: string;
 }
 
+interface HomeProps {
+  cocktail: string;
+}
 
-const Home: React.FC = (props) => {
+
+const Home: React.FC<HomeProps> = ( props ) => {
 
   const [cocktails, setCocktails] = useState<ICocktail[]>([]);
   const [popularCocktails,setPopularCocktails] = useState<ICocktail[]>([]);
@@ -62,6 +64,7 @@ const Home: React.FC = (props) => {
     }
   }, [buttonDisabled]);
   
+  
   // Animations
 
   const controls = useAnimation();
@@ -89,15 +92,34 @@ const Home: React.FC = (props) => {
     // Split the text into an array of characters
     const characters = Array.from(text);
 
-
     // Button for coffee, wine
     const buttonTexts = ["Coffee", "Wine", "Cocktail", "Tea"];
     const [buttonTextIndex, setButtonTextIndex] = useState(0); // New state for button text index
+    const [anotherIndex, setAnotherIndex] = useState(0)
 
-    const handleButtonClick = () => { // Function to handle button click
-      setButtonTextIndex((buttonTextIndex + 1) % buttonTexts.length);
+    const handleButtonClick = () => {
+      setButtonTextIndex(prevIndex => (prevIndex + 1) % buttonTexts.length);
+    }
+    const handleAnotherClick = () => {
+      if (buttonTexts[buttonTextIndex] === 'Coffee') {
+        const randomFact = Math.floor(Math.random() * coffeeFacts.length);
+        setAnotherIndex(randomFact);
+      }
+      if (buttonTexts[buttonTextIndex] === 'Wine') {
+        const randomFact = Math.floor(Math.random() * wineFacts.length);
+        setAnotherIndex(randomFact);
+      }
+      if (buttonTexts[buttonTextIndex] === 'Cocktail') {
+        const randomFact = Math.floor(Math.random() * cocktailFacts.length);
+        setAnotherIndex(randomFact);
+      }
+      if (buttonTexts[buttonTextIndex] === 'Tea') {
+        const randomFact = Math.floor(Math.random() * teaFacts.length);
+        setAnotherIndex(randomFact);
+      }
     }
 // Facts
+
       const [coffeeFacts, setCoffeeFacts] = useState([
         { fact: "Coffee is the second most consumed beverage in the world, after water." },
         { fact: "The origin of coffee can be traced back to Ethiopia, where legend has it that a goat herder discovered the energizing effects of coffee beans after his goats consumed them." },
@@ -126,12 +148,23 @@ const Home: React.FC = (props) => {
         { fact: "In the United Kingdom, afternoon tea is a cherished tradition that typically includes tea served with scones, clotted cream, and various pastries." },
       ]);
 
-    
+      // TODO
+      const factSets = {
+        'Coffee': coffeeFacts,
+        'Wine': wineFacts,
+        'Cocktail': cocktailFacts,
+        'Tea': teaFacts
+    };
+
   useEffect(() => {
     if (inView1) {
       controls.start("visible");
     }
   }, [controls, inView1]);
+
+
+
+  
   if(isLoading) { // If isLoading is true, render a loading message
     return <h2>Loading...</h2>
   } else {
@@ -216,8 +249,53 @@ const Home: React.FC = (props) => {
         <div className="divButn">
         <button className='didYouKnow' onClick={handleButtonClick}>{buttonTexts[buttonTextIndex]}</button>
       </div>
-      {buttonTexts[buttonTextIndex] === 'Coffee' && <p> Coffee Fact</p>}
+      {buttonTexts[buttonTextIndex] === 'Coffee' && 
+  <motion.p 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    {coffeeFacts[anotherIndex].fact}
+  </motion.p>
+}
 
+{buttonTexts[buttonTextIndex] === 'Wine' && 
+  <motion.p 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    {wineFacts[anotherIndex].fact}
+  </motion.p>
+}
+
+{buttonTexts[buttonTextIndex] === 'Cocktail' && 
+  <motion.p 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    {cocktailFacts[anotherIndex].fact}
+  </motion.p>
+}
+
+{buttonTexts[buttonTextIndex] === 'Tea' && 
+  <motion.p 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    {teaFacts[anotherIndex].fact}
+  </motion.p>
+}
+
+      <div className="divButn">
+        <button className='didYouKnow' onClick={handleAnotherClick}>Another</button>
+        </div>
       </motion.div>
 
 {/* CHOOSE A DRINK FOR ME */}
