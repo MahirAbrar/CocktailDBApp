@@ -7,21 +7,25 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMartiniGlass } from '@fortawesome/free-solid-svg-icons';
 
+import CocktailModal from '../components/CocktailModal';
 // Animation
 import "../styles/Home.css"
 
-interface ICocktail {
-  idDrink: string;
-  strDrink: string;
-  strDrinkThumb: string;
-}
-
 interface HomeProps {
-  cocktail: string;
 }
-
 
 const Home: React.FC<HomeProps> = ( props ) => {
+
+  interface ICocktail {
+    idDrink: string;
+    strDrink: string;
+    strDrinkThumb: string;
+  }
+  
+
+  
+  interface ISelectedDrink extends ICocktail {
+  }
 
   const [cocktails, setCocktails] = useState<ICocktail[]>([]);
   const [popularCocktails,setPopularCocktails] = useState<ICocktail[]>([]);
@@ -164,10 +168,18 @@ const Home: React.FC<HomeProps> = ( props ) => {
 
 
 
+  // Modal
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDrink, setSelectedDrink] = useState<ISelectedDrink | null>(null);
+
+
+
   
   if(isLoading) { // If isLoading is true, render a loading message
     return <h2>Loading...</h2>
-  } else {
+  }
+  
+  else {
     return (
       <>
       <motion.div className='contentBox'
@@ -180,11 +192,28 @@ const Home: React.FC<HomeProps> = ( props ) => {
     hidden: { opacity: 0 }
   }}
 >
+  {/* Images at the top section */}
         <div className="imageText">
           <div className="imageCircles">
             {cocktails.map((cocktail) => (
-              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} key={cocktail.idDrink}/>
+              <img 
+              src={cocktail.strDrinkThumb} 
+              alt={cocktail.strDrink} 
+              key={cocktail.idDrink}
+              onClick={() => {
+                  setSelectedDrink(cocktail as any);
+                  setShowModal(true);
+                  console.log(selectedDrink)
+              }}
+          />
+          
             ))}
+            {showModal && (
+        <CocktailModal 
+            drink={selectedDrink as any} 
+            onClose={() => setShowModal(false)}
+        />
+      )}
           </div>
         
           <h3 className='bigText'>
@@ -235,6 +264,8 @@ const Home: React.FC<HomeProps> = ( props ) => {
           ))}
         </div>
       </motion.div>
+      
+      {/* Did you Know DIV */}
       <motion.div className='contentBox'
   ref={ref3}
   animate={inView3 ? "visible" : "hidden"}
@@ -245,6 +276,7 @@ const Home: React.FC<HomeProps> = ( props ) => {
     hidden: { opacity: 0 }
   }}
 >
+  
         <h3 className='bigText'>Did you know?</h3>
         <div className="divButn">
         <button className='didYouKnow' onClick={handleButtonClick}>{buttonTexts[buttonTextIndex]}</button>

@@ -12,7 +12,7 @@ export default function App() {
       <Header />
       <div className="content">
       <Routes>
-        <Route path="/" element={<Home cocktail="cocktail" />} />
+        <Route path="/" element={<Home />} />
         <Route path='/cocktails' element={<Cocktails/>} />
         <Route path='/aboutus' element={<AboutUs/>} />
         <Route path='/login' element={<LoginPage />} />
