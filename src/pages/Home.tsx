@@ -29,19 +29,15 @@ const Home: React.FC<HomeProps> = (props) => {
 
   useEffect(() => {
     const fetchCocktails = async () => {
-      const result = await axios.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
-      );
-
+      const result = await axios.get("/api/cocktails");
       setCocktails(result.data.drinks.slice(0, 4));
     };
 
     const fetchPopularDrinks = async () => {
-      const result = await axios.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=p"
-      );
+      const result = await axios.get("/api/popular-cocktails");
       setPopularCocktails(result.data.drinks.slice(0, 3));
     };
+
     Promise.all([fetchCocktails(), fetchPopularDrinks()]).then(() => {
       setIsLoading(false); // After both promises resolve, set loading to false
     });
