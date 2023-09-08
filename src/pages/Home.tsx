@@ -48,9 +48,7 @@ const Home: React.FC<HomeProps> = (props) => {
 
   const getRandomDrink = async () => {
     setButtonDisabled(true);
-    const result = await axios.get(
-      "https://www.thecocktaildb.com/api/json/v1/1/random.php"
-    );
+    const result = await axios.get("/api/random-drink");
     setRandomDrink(result.data.drinks[0]);
   };
 

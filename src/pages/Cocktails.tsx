@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { debounce } from "lodash";
+import { response } from "express";
 
 export default function CocktailsSearch() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchContext, setSearchContext] = useState<
-    "Ingredients" | "Category"
+    "Ingredients" | "Category" | "Name"
   >("Ingredients");
   const [alcoholContent, setAlcoholContent] = useState<
     "Alcoholic" | "Non-Alcoholic" | "Opt Alcoholic"
@@ -11,19 +14,31 @@ export default function CocktailsSearch() {
   const [glassType, setGlassType] = useState<string>("");
   const [glassTypes, setGlassTypes] = useState<string[]>([]);
   const [results, setResults] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const handleSearch = debounce(() => {
+    if (searchQuery) {
+      if (searchQuery.length >= 1) {
+        // handle if search query length is 1
+        axios
+          .post("./api/search-letter", { searchQuery })
+          .then((response) => {
+            setResults(response.data.drinks);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        // ... handle other search lengths and contexts here
+      }
+    }
+  }, 300); // Adjust debounce time as needed
 
   useEffect(() => {
-    // Fetching the glass types from the API
-    fetch("https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list")
-      .then((response) => response.json())
-      .then((data) => {
-        setGlassTypes(data.drinks.map((drink: any) => drink.strGlass));
-      });
-  }, []);
-
-  const handleSearch = () => {
-    // Logic for fetching results based on search criteria will go here
-  };
+    if (searchQuery.length > 0) {
+      handleSearch();
+    }
+  }, [searchQuery]);
 
   return (
     <div>
