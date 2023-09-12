@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Cocktails from "./pages/Cocktails";
 import LoginPage from "./pages/LoginPage";
+import SignIn from "./pages/SignIn";
 
 export default function App() {
   return (
@@ -15,7 +16,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cocktails" element={<Cocktails />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<SignIn />} />
         </Routes>
       </div>
     </>
